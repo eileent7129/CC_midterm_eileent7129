@@ -10,217 +10,134 @@ let rectangle;
 let my_triangle;
 let x;
 let y;
-let shape;
+let new_shape;
+//let my_circle;
+let my_color;
+let angle;
+let circle1;
+let circle2;
+let circle3;
+let circle4;
+let circle5;
+let circle6;
+let circle7;
+let circle8;
+let circle9;
+let circle10;
+let circle11;
+let circle12;
+let opacity;
 
 function setup() {
-	createCanvas(800, 800);
+    createCanvas(800, 800);
+    background(253, 253, 203);
     //logo = new MovingLogo();
-    x = 50;
-    y = 50;
-    square = new Square(x, y);
-    rectangle = new Rectangle(x, y);
-    my_triangle = new MyTriangle(x, y);
-    shape = 2;
-    
+    x = 0;
+    y =  -300;
+    my_color = color(255);
+    angle = 0;
+    opacity = 10;
+    //square = new Square(x, y);
+    //rectangle = new Rectangle(x, y);
+    //my_triangle = new MyTriangle(x, y);
+    new_shape = 1;
+    //my_circle = new Circle(x, y, my_color);
+    circle1 = new Circle(0, -300, my_color);
+    circle2 = new Circle(300*(1 / 2), 300*(sqrt(3) / 2), my_color);
+    circle3 = new Circle(300*(sqrt(3) / 2), 300*(1 / 2), my_color);
+    circle4 = new Circle(300, 0, my_color);
+    circle5 = new Circle(300*(sqrt(3) / 2), -300*(1 / 2), my_color);
+    circle6 = new Circle(300 * (1 / 2), -300 * (sqrt(3) / 2), my_color);
+    circle7 = new Circle(0, 300, my_color);
+    circle8 = new Circle(-300 * (1 / 2), -300 * (sqrt(3) / 2), my_color);
+    circle9 = new Circle(-300 * (sqrt(3) / 2), -300 * (1 / 2), my_color);
+    circle10 = new Circle(-300, 0, my_color);
+    circle11 = new Circle(-300 * (sqrt(3) / 2), 300 * (1 / 2), my_color);
+    circle12 = new Circle(-300 * (1 / 2), 300 * (sqrt(3) / 2), my_color);
 }
 
 function draw() {
-	//logo.move();
-	//logo.display();
-    background(145, 145, 145);
+    //logo.move();
+    //logo.display();
+    /* background(253, 253, 203);*/
+    translate(width / 2, height / 2);
+    circle1.display();
+    circle1.change_color(opacity);
 
-    if (shape == 1) {
-        square.display();
-        square.move();
-       /* square.control();*/
-    }
+    circle2.display();
+    circle2.change_color(opacity);
 
-    else if (shape == 2) {
-        rectangle.display();
-        rectangle.move();
-    //    rectangle.control();
-    }
+    circle3.display();
+    circle3.change_color(opacity);
 
-    //else if (shape == 3) {
-    //    my_triangle.display();
-    //    my_triangle.move();
-    //    my_triangle.control();
+    circle4.display();
+    circle4.change_color(opacity);
+
+    circle5.display();
+    circle5.change_color(opacity);
+
+    circle6.display();
+    circle6.change_color(opacity);
+
+    circle7.display();
+    circle7.change_color(opacity);
+
+    circle8.display();
+    circle8.change_color(opacity);
+
+    circle9.display();
+    circle9.change_color(opacity);
+
+    circle10.display();
+    circle10.change_color(opacity);
+
+    circle11.display();
+    circle11.change_color(opacity);
+
+    circle12.display();
+    circle12.change_color(opacity);
+
+    //for (let i = 0; i <= 12; i++) {
+    //    rotate(radians(angle));
+    //    my_circle.display();
+    //    //my_circle.change_color();
+    //    print("this.x: "); print(my_circle.xPos()); print('\n');
+    //    print("this.y: "); print(my_circle.yPos()); print('\n');
+    //    print("angle: "); print(angle); print('\n');
+    //    angle += 30;
     //}
-
-    if (square.on_ground()) {
-        square.display();
-        shape += 1;
-    }
-
-    else if (rectangle.on_ground()) {
-        rectangle.display();
-        shape += 1;
-    }
-
-    //else if (triangle.on_ground()) {
-    //    shape += 1;
-    //}
-
-    //if (shape == 3) {
-    //    shape = 1;
-    //}
-
-    print("shape: "); print(shape); print('\n');
-    print("is square on ground? "); print(square.on_ground()); print('\n');
-    print("is rectangle on ground? "); print(rectangle.on_ground()); print('\n');
 }
 
-class Square {
+class Circle {
 
-    constructor(x, y) {
-        this.position = createVector(x, y);
-        this.velocity = createVector(0, 2);
+    constructor(x, y, my_color) {
+        this.x = x;
+        this.y = y;
+        this.my_color = my_color;
     }
 
     display() {
-        fill(255);
-        stroke(0);
-        strokeWeight(2);
-        rect(this.position.x, this.position.y, 20, 20);
-        rect(this.position.x, this.position.y + 20, 20, 20);
-        fill(100, 0, 0);
-        rect(this.position.x + 20, this.position.y, 20, 20);
-        rect(this.position.x + 20, this.position.y + 20, 20, 20);
+        noStroke();
+        fill(this.my_color);
+        circle(this.x, this.y, 50);
     }
 
-    move() {
-        this.position.add(this.velocity);
-        if (this.position.y == height - 40) {
-            this.velocity.y = 0;
-        }    
+    change_color(opacity) {
+        print("mouseX: "); print(mouseX - width / 2); print('\n');
+        print("mouseY: "); print(mouseY - height / 2); print('\n');
 
-    } // object needs to move down at a constant pace, once it reaches the bottom or touches another object, it stops
-
-    control() {
-        if (this.position.y == height - 40) {
-            this.position.x = this.position.x;
-        }
-        else if (keyIsPressed) {
-            this.position.x = constrain(this.position.x, 0, width - 40);
-
-            if (keyCode === RIGHT_ARROW) { // right arrow
-                this.position.x = this.position.x + 5;
-            }
-
-            else if (keyCode == LEFT_ARROW) { // left arrow 
-                this.position.x = this.position.x - 5;
-            }
-        }
-    }// user can control whether object moves left or right
-
-    on_ground() {
-
-        if (this.position.y == height - 40) {
-            return true;
-        }
-        else {
-            return false;
+        if ((mouseX - width / 2 >= this.x - 25 && mouseX - width / 2 <= this.x + 25) &&
+            mouseY - height / 2 >= this.y - 25 && mouseY - height / 2 <= this.y + 25) {
+            this.my_color = color(94, 0, 255, opacity); //purple
         }
     }
 
-    /*rotate() { } // user can rotate object by 90 degrees*/
-}
-
-class Rectangle {
-
-    constructor(x, y) {
-        this.position = createVector(x, y);
-        this.velocity = createVector(0, 2);
+    xPos() {
+        return this.x;
     }
 
-    display() {
-        fill(255);
-        stroke(0);
-        strokeWeight(2);
-        rect(this.position.x, this.position.y, 20, 20);
-        rect(this.position.x + 20, this.position.y, 20, 20);
-        rect(this.position.x + 40, this.position.y, 20, 20);
-        rect(this.position.x + 60, this.position.y, 20, 20);
+    yPos() {
+        return this.y;
     }
 
-    move() {
-        this.position.add(this.velocity);
-        if (this.position.y == height - 20) {
-            this.velocity.y = 0;
-        }
-    }
-
-    control() {
-        if (this.position.y == height - 20) {
-            this.position.x = this.position.x;
-        }
-        else if (keyIsPressed) {
-            this.position.x = constrain(this.position.x, 0, width-80);
-
-            if (keyCode === RIGHT_ARROW) { // right arrow
-                this.position.x = this.position.x + 5;
-            }
-
-            else if (keyCode == LEFT_ARROW) { // left arrow 
-                this.position.x = this.position.x - 5;
-            }
-        }
-    }
-
-    on_ground() {
-        if (this.position.y == height - 20) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-}
-
-class MyTriangle {
-    constructor(x,y) {
-        this.position = createVector(x, y);
-        this.velocity = createVector(0, 2);
-    }
-
-    display() {
-        fill(255);
-        stroke(0);
-        strokeWeight(2);
-        triangle(this.position.x, this.position.y, this.position.x - 40, this.position.y + 40, this.position.x + 40, this.position.y + 40);
-
-    }
-
-    move() {
-        this.position.add(this.velocity);
-        if (this.position.y == height - 40) {
-            this.velocity.y = 0;
-        }
-    }
-
-    control() {
-        if (this.position.y == height - 40) {
-            this.position.x = this.position.x;
-        }
-        else if (keyIsPressed) {
-            this.position.x = constrain(this.position.x, 40, width - 40);
-
-            if (keyCode === RIGHT_ARROW) { // right arrow
-                this.position.x = this.position.x + 5;
-            }
-
-            else if (keyCode == LEFT_ARROW) { // left arrow 
-                this.position.x = this.position.x - 5;
-            }
-        }
-    }
-
-    on_ground() {
-        if (this.position.y == height - 40) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }
