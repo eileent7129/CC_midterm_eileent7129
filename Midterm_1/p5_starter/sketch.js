@@ -13,7 +13,8 @@ let y;
 let new_shape;
 //let my_circle;
 let my_color;
-let angle;
+let angle1;
+let angle2;
 //let circle1;
 //let circle2;
 //let circle3;
@@ -30,24 +31,33 @@ let opacity;
 let radius;
 let array1;
 let array2;
+let array3;
+let array4;
+let array5;
+let array6;
 
 function setup() {
     createCanvas(800, 800);
-    background(253, 183, 246);
     //logo = new MovingLogo();
     frameRate(30);
-    x = 0;
-    y = -300;
-    radius = 300;
+    radius = 450;
     my_color = color(255);
-    angle = 0;
+    angle1 = 0;
+    angle2 = 0;
     opacity = 10;
     //square = new Square(x, y);
     //rectangle = new Rectangle(x, y);
     //my_triangle = new MyTriangle(x, y);
     new_shape = 1;
     array1 = circlePattern(radius, my_color);
-    array2 = circlePattern(radius - 100, my_color);
+    array2 = circlePattern(radius - 50, my_color);
+    array3 = circlePattern(radius - 100, my_color);
+    array4 = circlePattern(radius - 150, my_color);
+    array5 = circlePattern(radius - 200, my_color);
+    array6 = circlePattern(radius - 250, my_color);
+    array7 = circlePattern(radius - 300, my_color);
+    array8 = circlePattern(radius - 350, my_color);
+    array9 = circlePattern(radius - 400, my_color);
 
 }
 
@@ -55,10 +65,72 @@ function draw() {
     //logo.move();
     //logo.display();
 
-    displayPattern(array1, opacity);
-    displayPattern(array2, opacity);
-
+    background(253, 183, 246);
+    applyMatrix();
     translate(width / 2, height / 2);
+    rotate(radians(angle1));
+    displayPattern(array1);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle2));
+    displayPattern(array2);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle1));
+    displayPattern(array3);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle2));
+    displayPattern(array4);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle1));
+    displayPattern(array5);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle2));
+    displayPattern(array6);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle1));
+    displayPattern(array7);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle2));
+    displayPattern(array8);
+    resetMatrix();
+
+    applyMatrix();
+    translate(width / 2, height / 2);
+    rotate(radians(angle1));
+    displayPattern(array9);
+    resetMatrix();
+    if (angle1 > 360) {
+        angle1 = 0;
+    }
+
+
+    if (angle2 < -360) {
+        angle2 = 0;
+    }
+
+    angle1++;
+    angle2--;
+   
 }
 
 class Circle {
@@ -72,16 +144,16 @@ class Circle {
     display() {
         noStroke();
         fill(this.my_color);
-        circle(this.x, this.y, 50);
+        circle(this.x, this.y, 30);
     }
 
-    change_color(opacity) {
+    change_color() {
         print("mouseX: "); print(mouseX - width / 2); print('\n');
         print("mouseY: "); print(mouseY - height / 2); print('\n');
 
         if ((mouseX - width / 2 >= this.x - 25 && mouseX - width / 2 <= this.x + 25) &&
             mouseY - height / 2 >= this.y - 25 && mouseY - height / 2 <= this.y + 25) {
-            this.my_color = color(94, 0, 255, opacity); //purple
+            this.my_color = color(94, 0, 255); //purple
         }
     }
 
@@ -133,10 +205,10 @@ function circlePattern(my_radius, my_color) {
     
 }
 
-function displayPattern(circle_array, my_opacity) {
+function displayPattern(circle_array) {
 
     for (let i = 0; i < circle_array.length; i++) {
         circle_array[i].display();
-        circle_array[i].change_color(my_opacity);
+        circle_array[i].change_color();
     }
 }
