@@ -12,6 +12,7 @@ let array6;
 let idx;
 let next;
 let change;
+let circleArray = [];
 
 function setup() {
     createCanvas(800, 800);
@@ -19,7 +20,7 @@ function setup() {
     frameRate(30);
     radius = 480;
     my_color = color(255);
-    angle1 = 0;
+    angle1 = 1;
     angle2 = 0;
     idx = 0;
     next = 1;
@@ -29,222 +30,43 @@ function setup() {
     new_shape = 1;
     change = 1;
 
-    array1 = circlePattern(radius, my_color);
-    array2 = circlePattern(radius - 40, my_color);
-    array3 = circlePattern(radius - 80, my_color);
-    array4 = circlePattern(radius - 120, my_color);
-    array5 = circlePattern(radius - 160, my_color);
-    array6 = circlePattern(radius - 200, my_color);
-    array7 = circlePattern(radius - 240, my_color);
-    array8 = circlePattern(radius - 280, my_color);
-    array9 = circlePattern(radius - 320, my_color);
-    array10 = circlePattern(radius - 360, my_color);
-    array11 = circlePattern(radius - 400, my_color);
-    array12 = circlePattern(radius - 440, my_color);
+    for (let i = radius ; i > 40; i -= 40) {
+        circleArray.push(new circlePattern(i, my_color));
+    }
+
 }
 
 function draw() {
     background(0);
 
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array1);
-    if (next == 1) {
-        if (frameCount % 10 == 0) {
-            changeColor(array1, idx, change);
-            idx++
+    for (let i = 0; i < circleArray.length; i++) {
+        applyMatrix();
+        translate(width / 2, height / 2);
+        if (i % 2 != 0) {
+            rotate(radians(angle1));
+            displayPattern(circleArray[i]);
+            if (frameCount % 10 == 0) {
+                changeColor(circleArray[i], idx, change);
+                idx++;
+            }
+            if (idx == 12) {
+                idx = 0;
+            }
         }
-        if (idx == 12) {
-            idx = 0;
-            next = 2;
+        else if (i % 2 == 0) {
+            rotate(radians(angle2));
+            displayPattern(circleArray[i]);
+            if (frameCount % 10 == 0) {
+                changeColor(circleArray[i], idx, change);
+                idx++;
+            }
+            if (idx == 12) {
+                idx = 0;
+            }
         }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array2);
-    if (next == 2) {
-        if (frameCount % 10 == 0) {
-            changeColor(array2, idx, change);
-            idx++
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 3;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array3);
-    if (next == 3) {
-        if (frameCount % 10 == 0) {
-            changeColor(array3, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 4;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array4);
-    if (next == 4) {
-        if (frameCount % 10 == 0) {
-            changeColor(array4, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 5;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array5);
-    if (next == 5) {
-        if (frameCount % 10 == 0) {
-            changeColor(array5, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 6;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array6);
-    if (next == 6) {
-        if (frameCount % 10 == 0) {
-            changeColor(array6, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 7;
-        }
-    }
-
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array7);
-    if (next == 7) {
-        if (frameCount % 10 == 0) {
-            changeColor(array7, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 8;
-        }
-    }
-
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array8);
-
-    if (next == 8) {
-        if (frameCount % 10 == 0) {
-            changeColor(array8, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 9;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array9);
-
-    if (next == 9) {
-        if (frameCount % 10 == 0) {
-            changeColor(array9, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 10;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array10);
-
-    if (next == 10) {
-        if (frameCount % 10 == 0) {
-            changeColor(array10, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 11;
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle1));
-    displayPattern(array11);
-
-    if (next == 11) {
-        if (frameCount % 10 == 0) {
-            changeColor(array11, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-            next = 12
-        }
-    }
-    resetMatrix();
-
-    applyMatrix();
-    translate(width / 2, height / 2);
-    rotate(radians(angle2));
-    displayPattern(array12);
-
-    if (next == 12) {
-        if (frameCount % 10 == 0) {
-            changeColor(array12, idx, change);
-            idx++;
-        }
-        if (idx == 12) {
-            idx = 0;
-        }
-    }
-    resetMatrix();
-
+        print(i);
+        resetMatrix();
+    }  
     if (angle1 > 360) {
         angle1 = 0;
     }
@@ -291,26 +113,6 @@ class Circle {
             this.my_color = color(38, 7, 243); // blue
         }
     }
-
-    blotch() {
-
-        strokeWeight(2);
-        stroke(255);
-        line(this.x - 25, this.y, this.x + 25, this.y);
-        line(this.x - 10, this.y + 15, this.x + 10, this.y + 10);
-        line(this.x, this.y + 6, this.x - 5, this.y);
-        line(this.x + 10, this.y, this.x - 10, this.y);
-        line(this.x - 10, this.y - 10, this.x + 5, this.y + 10);
-        line(this.x + 10, this.y + 10, this.x - 7, this.y + 3);
-        line(this.x + 2, this.y + 2, this.x + 9, this.y + 9);
-        line(this.x + 6, this.y + 1, this.x + 2, this.y + 12);
-        line(this.x - 2, this.y + 8, this.x - 5, this.y + 2);
-        line(this.x + 12, this.y + 3, this.x - 15, this.y + 2);
-        line(this.x - 20, this.y - 5, this.x + 5, this.y + 10);
-        line(this.x + 5, this.y + 10, this.x - 10, this.y + 3);
-        line(this.x + 5, this.y - 15, this.x - 10, this.y - 3);
-    }
-
     xPos() {
         return this.x;
     }
@@ -351,5 +153,4 @@ function displayPattern(circle_array) {
 function changeColor(circle_array, my_idx, change_color) {
     /*print(frameCount);*/
     circle_array[my_idx].change_color(change_color);
-
 }
