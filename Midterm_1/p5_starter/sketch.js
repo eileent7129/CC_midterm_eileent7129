@@ -1,10 +1,4 @@
 // JavaScript source code
-//let logo;
-//let upper_left;
-//let upper_right;
-//let bottom_left;
-//let bottom_right;
-
 let next_scene;
 
 // tetris
@@ -45,25 +39,7 @@ let dominoSystem = [];
 function setup() {
     createCanvas(800, 800);
     next_scene = 1;
-    //logo = new MovingLogo();
     frameRate(30);
-   
-    //idx = 0;
-    //next = 1;
-    //origin_x = width / 2;
-    //origin_y = height / 2;
-    //fall = false;
-    //square = new Square(x, y);
-    //rectangle = new Rectangle(x, y);
-    //my_triangle = new MyTriangle(x, y);
-    //new_shape = 1;
-    //change = 1;
-
-    // domino scene
-    //for (let x = 20; x < width; x += 60) {
-    //    domino = new Domino(-10, -50);
-    //    dominoArray.push(domino);
-    //}
 
     //domino scene
 
@@ -91,14 +67,11 @@ function setup() {
     array10 = circlePattern(radius - 360, my_color);
     array11 = circlePattern(radius - 400, my_color);
     array12 = circlePattern(radius - 440, my_color);
-   
+
 }
 
 function draw() {
-    //logo.move();
-    //logo.display();
-
-   
+  
     if (next_scene == 1) { // circle pattern
         background(0);
         sceneOne();
@@ -109,7 +82,7 @@ function draw() {
         sceneTwo();
     }
 
-   
+
 }
 
 function mousePressed() {
@@ -123,17 +96,14 @@ function mousePressed() {
 function sceneTwo() {
     //when frameCount % 5 == 0, this should trigger the animation of the domino to fall down 
     // try using an array for the dominoes
-
-
     for (let i = 0; i < dominoSystem.length; i++) {
-       
+
         dominoSystem[i].addDomino();
 
         if (i == 0) {
             dominoSystem[i].run(true, i);
         }
         else {
-            
             dominoSystem[i].run(dominoSystem[i - 1].finished(), i);
         }
 
