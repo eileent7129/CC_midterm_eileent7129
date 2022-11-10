@@ -5,6 +5,7 @@
 //let bottom_left;
 //let bottom_right;
 
+let next_scene;
 
 // tetris
 let square;
@@ -35,8 +36,7 @@ let idx;
 let next;
 let change;
 
-
-//domino
+//domino scene
 let domino;
 let domino2;
 let domino3;
@@ -44,9 +44,9 @@ let dominoSystem = [];
 
 function setup() {
     createCanvas(800, 800);
+    next_scene = 1;
     //logo = new MovingLogo();
     frameRate(30);
-    
    
     //idx = 0;
     //next = 1;
@@ -59,14 +59,17 @@ function setup() {
     //new_shape = 1;
     //change = 1;
 
+    // domino scene
     //for (let x = 20; x < width; x += 60) {
     //    domino = new Domino(-10, -50);
     //    dominoArray.push(domino);
     //}
 
-    //for (let y = 60; y < height - 10; y += 60) {
-    //    dominoSystem.push(new DominoSystem(y));
-    //}
+    //domino scene
+
+    for (let y = 60; y < height - 10; y += 60) {
+        dominoSystem.push(new DominoSystem(y));
+    }
 
     //circle pattern scene
     radius = 480;
@@ -95,25 +98,44 @@ function draw() {
     //logo.move();
     //logo.display();
 
-    background(0);
+   
+    if (next_scene == 1) { // circle pattern
+        background(0);
+        sceneOne();
+    }
 
-    sceneOne();
-    
+    if (next_scene == 2) { // dominoes
+        background(0);
+        sceneTwo();
+    }
 
+   
+}
+
+function mousePressed() {
+    next_scene++;
+    if (next_scene == 3) {
+        next_scene = 1;
+    }
+
+}
+
+function sceneTwo() {
     //when frameCount % 5 == 0, this should trigger the animation of the domino to fall down 
     // try using an array for the dominoes
 
 
-    //for (let i = 0; i < dominoSystem.length; i++) {
-    //    dominoSystem[i].addDomino();
-
-    //    if (i == 0) {
-    //        dominoSystem[i].run(true);
-    //    }
-    //    else {
-    //        dominoSystem[i].run(dominoSystem[i-1].finished());
-    //    }
+    for (let i = 0; i < dominoSystem.length; i++) {
        
-    //}
-}
+        dominoSystem[i].addDomino();
 
+        if (i == 0) {
+            dominoSystem[i].run(true, i);
+        }
+        else {
+            
+            dominoSystem[i].run(dominoSystem[i - 1].finished(), i);
+        }
+
+    }
+}
