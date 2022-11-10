@@ -37,7 +37,7 @@ let domino3;
 let dominoSystem = [];
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(displayWidth, displayHeight);
     next_scene = 1;
     frameRate(30);
 
